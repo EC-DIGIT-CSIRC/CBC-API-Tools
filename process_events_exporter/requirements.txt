@@ -1,0 +1,4 @@
+# Package dependencies
+-r ../base-requirements.txt
+tqdm
+anytree
