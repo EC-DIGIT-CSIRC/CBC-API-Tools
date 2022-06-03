@@ -33,7 +33,7 @@ pip install -r requirements.txt
 This script needs the following arguments:
 
 - profile: [Carbon Black Cloud API SDK file profile to use](https://carbon-black-cloud-python-sdk.readthedocs.io/en/latest/authentication/#with-a-file).
-- guid: Process GUID. _Note: The Process GUID is not present in the User Interface, but in the URL._
+- guid: [Process GUID](#how-to-get-the-process-guid).
 - start: When to start the result search. ISO 8601 timestamp, e.g. YYYY-MM-DDTHH:mm:ssZ
 - end: When to end the result search. ISO 8601 timestamp, e.g. YYYY-MM-DDTHH:mm:ssZ
 - summary: Path to the [summary configuration file](#summary-file) that contains the attributes of the different event types to be included in the summary column.
@@ -71,6 +71,18 @@ optional arguments:
   --verbose             enable debug logging
 ```
 
+### How to get the Process GUID
+
+You can retrieve the process GUID of the _currently_ selected process by clicking on the button _Take Action_ and selecting the option menu _Share Process Tree_.
+
+![alt text](media/share-process-tree-1.png)
+
+What does it mean the _currently_ selected process? The one highlighted in red within the process tree. Seeing the simple instructions above, you might think that the process GUID is then present in the URL (as highlighted in the first picture). However, this is misleading, because that is only valid when the Process Analysis page opens for the first time.
+
+Therefore, always use the option _Share Process Tree_ to retrieve the process GUID of the highlighted process.
+
+![alt text](media/share-process-tree-2.png)
+
 ### Example of exporting events from a process
 
 ```bash
@@ -98,7 +110,7 @@ This will result in a CSV file with the following columns:
 export_process_events.py --profile dev --guid "XXXXXXXX-0040c4bc-000002e4-00000000-1d7245f3bcf847c" --start "2021-03-29T12:00:00Z" --end "2021-03-29T16:00:00Z" --outfile 'PATH_TO/CSV_FILE.csv' --summary 'PATH_TO/summary.json' --follow_childprocs 2
 ```
 
-In this case, on top of the CSV files, a JSON file will be created with the parent-child relationship.
+In this case, on top of the CSV files (one per process), a JSON file will be created with the parent-child relationship.
 
 ![alt text](media/exported-process-tree-events-csv.png)
 
